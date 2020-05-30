@@ -17,6 +17,26 @@ class ClientsRepository implements IClientsRepository {
     return clients;
   }
 
+  public async findClientByNameAndBirthdate(
+    name: string,
+    phone: string,
+    birthdate: Date,
+  ): Promise<Clients | undefined> {
+    const clients = await this.ormRepository.find({
+      where: { phone, birthdate },
+    });
+
+    const filteredClient = clients.filter(
+      (client) => client.name.toLocaleLowerCase() === name.toLocaleLowerCase(),
+    );
+
+    if (filteredClient) {
+      return filteredClient[0];
+    }
+
+    return filteredClient;
+  }
+
   public async create(data: ICreateClientDTO): Promise<Clients> {
     const client = await this.ormRepository.create(data);
 
