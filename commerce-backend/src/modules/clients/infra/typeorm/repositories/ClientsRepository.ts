@@ -17,6 +17,12 @@ class ClientsRepository implements IClientsRepository {
     return clients;
   }
 
+  public async findById(id: string): Promise<Clients | undefined> {
+    const client = await this.ormRepository.findOne(id);
+
+    return client;
+  }
+
   public async findClientByNameAndBirthdate(
     name: string,
     phone: string,

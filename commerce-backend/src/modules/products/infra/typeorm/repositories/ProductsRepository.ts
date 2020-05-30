@@ -4,6 +4,10 @@ import IProductsRepository from '@modules/products/repositories/IProductsReposit
 import ICreateProductsDTO from '@modules/products/dtos/ICreateProductsDTO';
 import Products from '../entities/Products';
 
+interface IFindProducts {
+  id: string;
+}
+
 class ProductsRepository implements IProductsRepository {
   private ormRepository: Repository<Products>;
 
@@ -13,6 +17,12 @@ class ProductsRepository implements IProductsRepository {
 
   public async listAll(): Promise<Products[]> {
     const products = await this.ormRepository.find();
+
+    return products;
+  }
+
+  public async findAllById(products_ids: IFindProducts[]): Promise<Products[]> {
+    const products = await this.ormRepository.findByIds(products_ids);
 
     return products;
   }

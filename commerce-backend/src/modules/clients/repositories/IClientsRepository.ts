@@ -9,4 +9,5 @@ export default interface IClientsRepository {
     phone: string,
     birthdate: Date,
   ): Promise<Clients | undefined>;
+  findById(id: string): Promise<Clients | undefined>;
 }
