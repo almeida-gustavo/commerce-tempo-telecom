@@ -6,9 +6,10 @@ import CreateProductService from '../../services/CreateProductService';
 
 export default class ClientsController {
   public async index(request: Request, response: Response): Promise<Response> {
+    const { active } = request.query;
     const findAllProducts = container.resolve(FindAllProductsService);
 
-    const clients = await findAllProducts.execute();
+    const clients = await findAllProducts.execute(active?.toString());
 
     return response.json(clients);
   }

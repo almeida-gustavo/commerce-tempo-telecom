@@ -3,6 +3,7 @@ import ICreateClientDTO from '@modules/clients/dtos/ICreateClientDTO';
 
 export default interface IClientsRepository {
   listAll(): Promise<Clients[]>;
+  listAllActiveClients(active: boolean): Promise<Clients[]>;
   create(data: ICreateClientDTO): Promise<Clients>;
   findClientByNameAndBirthdate(
     name: string,

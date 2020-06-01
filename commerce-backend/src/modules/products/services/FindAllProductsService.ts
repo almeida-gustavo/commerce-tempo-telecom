@@ -10,7 +10,17 @@ class FindAllProductsService {
     private productsRepository: IProductsRepository,
   ) {}
 
-  public async execute(): Promise<Products[]> {
+  public async execute(queryActive?: string): Promise<Products[]> {
+    if (queryActive === 'true' || queryActive === 'false') {
+      const active = queryActive === 'true';
+
+      const activeProducts = await this.productsRepository.listAllActiveProducts(
+        active,
+      );
+
+      return activeProducts;
+    }
+
     const products = await this.productsRepository.listAll();
 
     return products;

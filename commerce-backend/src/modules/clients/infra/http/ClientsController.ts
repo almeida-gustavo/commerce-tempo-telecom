@@ -6,9 +6,11 @@ import CreateClientService from '../../services/CreateClientService';
 
 export default class ClientsController {
   public async index(request: Request, response: Response): Promise<Response> {
+    const { active } = request.query;
+
     const findAllClients = container.resolve(FindAllClientsService);
 
-    const clients = await findAllClients.execute();
+    const clients = await findAllClients.execute(active?.toString());
 
     return response.json(clients);
   }

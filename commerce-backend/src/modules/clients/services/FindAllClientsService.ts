@@ -10,7 +10,16 @@ class FindAllClientsService {
     private clientsRepository: IClientsRepository,
   ) {}
 
-  public async execute(): Promise<Clients[]> {
+  public async execute(queryActive?: string): Promise<Clients[]> {
+    if (queryActive === 'true' || queryActive === 'false') {
+      const active = queryActive === 'true';
+
+      const activeClients = await this.clientsRepository.listAllActiveClients(
+        active,
+      );
+
+      return activeClients;
+    }
     const clients = await this.clientsRepository.listAll();
 
     return clients;

@@ -17,6 +17,12 @@ class ClientsRepository implements IClientsRepository {
     return clients;
   }
 
+  public async listAllActiveClients(active: boolean): Promise<Clients[]> {
+    const clients = await this.ormRepository.find({ where: { active } });
+
+    return clients;
+  }
+
   public async findById(id: string): Promise<Clients | undefined> {
     const client = await this.ormRepository.findOne(id);
 

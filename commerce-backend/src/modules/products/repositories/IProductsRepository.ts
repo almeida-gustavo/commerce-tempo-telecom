@@ -7,6 +7,7 @@ interface IFindProducts {
 
 export default interface IClientsRepository {
   listAll(): Promise<Products[]>;
+  listAllActiveProducts(active: boolean): Promise<Products[]>;
   findAllById(products: IFindProducts[]): Promise<Products[]>;
   create(data: ICreateProductsDTO): Promise<Products>;
   findProductByName(name: string): Promise<Products | undefined>;
