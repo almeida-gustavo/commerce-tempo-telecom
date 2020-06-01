@@ -1,6 +1,5 @@
 import { inject, injectable } from 'tsyringe';
 
-// import ICreateOrderDTO from 'modules/orders/dtos/ICreateOrdersDTO';
 import IClientsRepository from '@modules/clients/repositories/IClientsRepository';
 import AppError from '@shared/errors/AppError';
 import IProductsRepository from 'modules/products/repositories/IProductsRepository';
@@ -80,6 +79,8 @@ class CreateOrdersService {
       client,
       products: productsArray,
     });
+
+    await this.ordersRepository.save(order);
 
     const totalOrder = await this.ordersRepository.getOrderTotal(order.id);
 

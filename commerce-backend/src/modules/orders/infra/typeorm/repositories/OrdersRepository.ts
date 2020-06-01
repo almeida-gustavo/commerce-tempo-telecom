@@ -22,9 +22,18 @@ class OrdersRepository implements IOrdersRepository {
     return order;
   }
 
+  public async save(data: Order): Promise<Order> {
+    return this.ormRepository.save(data);
+  }
+
   public async findAllOrders(): Promise<Order[]> {
     const orders = await this.ormRepository.find();
     return orders;
+  }
+
+  public async findOneOrder(id: string): Promise<Order | undefined> {
+    const order = await this.ormRepository.findOne(id);
+    return order;
   }
 
   public async getOrderTotal(order_id: string): Promise<number | 0> {

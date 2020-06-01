@@ -21,6 +21,12 @@ class ProductsRepository implements IProductsRepository {
     return products;
   }
 
+  public async findOne(id: string): Promise<Products | undefined> {
+    const product = await this.ormRepository.findOne(id);
+
+    return product;
+  }
+
   public async listAllActiveProducts(active: boolean): Promise<Products[]> {
     const products = await this.ormRepository.find({ where: { active } });
 
@@ -54,6 +60,10 @@ class ProductsRepository implements IProductsRepository {
     await this.ormRepository.save(product);
 
     return product;
+  }
+
+  public async save(data: Products): Promise<Products> {
+    return this.ormRepository.save(data);
   }
 }
 

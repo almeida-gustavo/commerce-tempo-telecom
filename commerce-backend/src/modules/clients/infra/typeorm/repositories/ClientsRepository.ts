@@ -17,6 +17,12 @@ class ClientsRepository implements IClientsRepository {
     return clients;
   }
 
+  public async findOne(id: string): Promise<Clients | undefined> {
+    const client = await this.ormRepository.findOne(id);
+
+    return client;
+  }
+
   public async listAllActiveClients(active: boolean): Promise<Clients[]> {
     const clients = await this.ormRepository.find({ where: { active } });
 
@@ -55,6 +61,10 @@ class ClientsRepository implements IClientsRepository {
     await this.ormRepository.save(client);
 
     return client;
+  }
+
+  public async save(data: Clients): Promise<Clients> {
+    return this.ormRepository.save(data);
   }
 }
 

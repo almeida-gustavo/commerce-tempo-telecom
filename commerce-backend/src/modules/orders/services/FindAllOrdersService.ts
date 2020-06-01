@@ -1,22 +1,13 @@
 import { inject, injectable } from 'tsyringe';
 
-import IProductsRepository from '@modules/products/repositories/IProductsRepository';
-
 import IOrdersRepository from '../repositories/IOrdersRepository';
 import IResultOrderDto from '../dtos/IResultOrderDTO';
-
-interface IRequest {
-  id: string;
-}
 
 @injectable()
 class FindOrderService {
   constructor(
     @inject('OrdersRepository')
     private ordersRepository: IOrdersRepository,
-
-    @inject('ProductsRepository')
-    private productsRepository: IProductsRepository,
   ) {}
 
   public async execute(): Promise<IResultOrderDto[]> {
