@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import api from '../../services/api';
+import formatValue from '../../utils/formatValue';
 
 import { Container, Table } from './styles';
 
 interface ProductsDTO {
   id: string;
   name: string;
-  price: string;
+  price: number;
   active: boolean;
 }
 
@@ -22,6 +23,17 @@ const Dashboard: React.FC = () => {
     }
     loadProducts();
   }, []);
+
+  const handleActiveUpdate = async (product: ProductsDTO): Promise<void> => {
+    const { data } = await api.put(`/products/${product.id}`, {
+      name: product.name,
+      price: product.price,
+      active: !product.active,
+    });
+
+    const nonUpdatedProducts = products.filter((p) => p.id !== product.id);
+    setProducts([...nonUpdatedProducts, data]);
+  };
 
   return (
     <Container>
@@ -44,9 +56,19 @@ const Dashboard: React.FC = () => {
           {products &&
             products.map((product) => (
               <tr key={product.id}>
-                <td>{product.name}</td>
-                <td>{product.price}</td>
-                <td>{product.active.toString()}</td>
+                <td>
+                  {/* <Link to={`/products/${product.id}`}>{product.name}</Link> */}
+                  {product.name}
+                </td>
+                <td>{formatValue(product.price)}</td>
+                <td>
+                  <button
+                    type="button"
+                    onClick={() => handleActiveUpdate(product)}
+                  >
+                    {product.active.toString()}
+                  </button>
+                </td>
               </tr>
             ))}
         </tbody>

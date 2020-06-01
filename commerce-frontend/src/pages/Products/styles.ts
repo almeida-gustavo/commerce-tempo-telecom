@@ -6,6 +6,12 @@ export const Container = styled.div`
   margin: 0 auto;
   padding: 20px;
 
+  background-color: #fff;
+  margin-top: 50px;
+  -webkit-box-shadow: 5px 5px 0 -2px #cfcfcf, 5px 5px 0 0 #eaeaea;
+  -moz-box-shadow: 5px 5px 0 -2px #cfcfcf, 5px 5px 0 0 #eaeaea;
+  box-shadow: 5px 5px 0 -2px #cfcfcf, 5px 5px 0 0 #eaeaea;
+
   div {
     display: flex;
     justify-content: space-between;
@@ -15,13 +21,13 @@ export const Container = styled.div`
       height: 30px;
       border: 0;
       background: transparent;
-      background: #d08655;
+      background: #ff872c;
       border-radius: 4px;
       padding: 5px 15px;
       transition: background-color 0.2s;
 
       &:hover {
-        background-color: ${shade(0.2, '#d08655')};
+        background-color: ${shade(0.2, '#ff872c')};
       }
     }
   }
@@ -51,5 +57,10 @@ export const Table = styled.table`
     height: 30px;
     text-align: center;
     /* padding-left: 10px; */
+
+    button {
+      border: none;
+      background: transparent;
+    }
   }
 `;

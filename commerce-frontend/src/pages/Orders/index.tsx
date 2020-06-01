@@ -1,14 +1,17 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { format } from 'date-fns';
 
 import api from '../../services/api';
+import formatValue from '../../utils/formatValue';
 
 import { Container, Table } from './styles';
 
 interface OrdersDTO {
   order: {
     id: string;
-    created_at: Date;
+    created_at: string;
     client: {
       id: string;
       name: string;
@@ -24,6 +27,7 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     async function loadProducts(): Promise<void> {
       const { data } = await api.get('/orders');
+
       setOrders(data);
     }
     loadProducts();
@@ -44,7 +48,7 @@ const Dashboard: React.FC = () => {
             <th>ID Ordem</th>
             <th>Nome Cliente</th>
             <th>Total Ordem</th>
-            <th>Horario</th>
+            <th>Data</th>
           </tr>
         </thead>
         <tbody>
@@ -53,8 +57,9 @@ const Dashboard: React.FC = () => {
               <tr key={order.order.id}>
                 <td>{order.order.id}</td>
                 <td>{order.order.client.name}</td>
-                <td>{order.totalOrder}</td>
-                <td>{order.order.created_at}</td>
+                <td>{formatValue(order.totalOrder)}</td>
+
+                <td>{order.order.created_at.split('T')[0]}</td>
               </tr>
             ))}
         </tbody>

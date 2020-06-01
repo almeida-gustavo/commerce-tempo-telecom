@@ -23,6 +23,17 @@ const Dashboard: React.FC = () => {
     loadProducts();
   }, []);
 
+  const handleActiveUpdate = async (client: ClientsDTO): Promise<void> => {
+    const { data } = await api.put(`/clients/${client.id}`, {
+      name: client.name,
+      phone: client.phone,
+      active: !client.active,
+    });
+
+    const nonUpdatedclients = clients.filter((c) => c.id !== client.id);
+    setClients([...nonUpdatedclients, data]);
+  };
+
   return (
     <Container>
       <div>
@@ -46,7 +57,14 @@ const Dashboard: React.FC = () => {
               <tr key={client.id}>
                 <td>{client.name}</td>
                 <td>{client.phone}</td>
-                <td>{client.active.toString()}</td>
+                <td>
+                  <button
+                    type="button"
+                    onClick={() => handleActiveUpdate(client)}
+                  >
+                    {client.active.toString()}
+                  </button>
+                </td>
               </tr>
             ))}
         </tbody>

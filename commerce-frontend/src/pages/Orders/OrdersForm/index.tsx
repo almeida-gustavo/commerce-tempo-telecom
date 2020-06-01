@@ -5,8 +5,8 @@ import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 
 import api from '../../../services/api';
-import Input from '../../../components/Input';
 import Select from '../../../components/Select';
+import formatValue from '../../../utils/formatValue';
 
 import { Container } from './styles';
 
@@ -96,14 +96,26 @@ const Dashboard: React.FC = () => {
         {selectedProducts &&
           selectedProducts.map((product) => (
             <div key={product.id}>
-              <span>{product.name}</span>
-              <span>{product.price}</span>
+              <span>Produto: {product.name}</span>
+              <span> - Preço: {formatValue(product.price)}</span>
             </div>
           ))}
 
-        <span>Total Ordem: {orderTotal}</span>
-
-        <button type="submit">Cadastrar</button>
+        <div>
+          <span className="total">Total Ordem: {formatValue(orderTotal)}</span>
+          <div>
+            <button className="submitButton" type="submit">
+              Cadastrar
+            </button>
+            <button
+              className="cancelButton"
+              type="button"
+              onClick={() => history.push('/')}
+            >
+              Cancelar
+            </button>
+          </div>
+        </div>
       </Form>
     </Container>
   );

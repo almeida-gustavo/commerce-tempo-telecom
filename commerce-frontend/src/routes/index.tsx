@@ -15,6 +15,7 @@ const Routes: React.FC = () => (
     <Route path="/orders/register" component={OrdersForm} />
     <Route path="/clients" exact component={Clients} />
     <Route path="/clients/register" component={ClientsForm} />
+    {/* <Route path="/clients/:id" component={ClientsForm} /> */}
     <Route path="/products" exact component={Products} />
     <Route path="/products/register" component={ProductsForm} />
   </Switch>

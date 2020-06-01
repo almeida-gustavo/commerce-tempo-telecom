@@ -44,9 +44,22 @@ const Dashboard: React.FC = () => {
 
         <Input name="phone" placeholder="Telefone" />
 
-        <Input name="birthdate" placeholder="Data de Nascimento" />
+        <Input
+          name="birthdate"
+          placeholder="Data de Nascimento... Ex: 2020-03-19"
+        />
 
-        <button type="submit">Cadastrar</button>
+        <button className="submitButton" type="submit">
+          Cadastrar
+        </button>
+
+        <button
+          className="cancelButton"
+          type="button"
+          onClick={() => history.push('/clients')}
+        >
+          Cancelar
+        </button>
       </Form>
     </Container>
   );

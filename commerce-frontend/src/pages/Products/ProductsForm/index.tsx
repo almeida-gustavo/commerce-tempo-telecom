@@ -40,9 +40,18 @@ const Dashboard: React.FC = () => {
 
         <Input name="name" placeholder="Nome" />
 
-        <Input name="price" placeholder="Preço" />
+        <Input name="price" placeholder="Preço... Ex: 30.99" />
 
-        <button type="submit">Cadastrar</button>
+        <button className="submitButton" type="submit">
+          Cadastrar
+        </button>
+        <button
+          className="cancelButton"
+          type="button"
+          onClick={() => history.push('/products')}
+        >
+          Cancelar
+        </button>
       </Form>
     </Container>
   );

@@ -20,7 +20,7 @@ productsRouter.put(
   '/:id',
   celebrate({
     [Segments.PARAMS]: {
-      id: Joi.string().uuid().required(),
+      id: Joi.string().required(),
     },
     [Segments.BODY]: {
       name: Joi.string(),
